@@ -1,18 +1,34 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <p>Counter: {{$store.state.counter}}</p>
+    <CgmButton title="Click me!" @buttonClicked="updateCounter()"/>
+
+    <CounterHistory ref="counterHistory"/>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
+import CgmButton from '@/components/CgmButton.vue'
+import CounterHistory from '@/components/CounterHistory.vue'
+
+
+// @ is an alias to /src
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    CgmButton,
+    CounterHistory
+  },
+  data() {
+    return {
+      counter: 0
+    }
+  },
+  methods: {
+    updateCounter() {
+      this.$store.commit("increment");
+    }
   }
 }
 </script>
